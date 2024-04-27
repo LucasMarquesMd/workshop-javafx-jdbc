@@ -14,7 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));//Permite a manipulacao da tela antes de cerrega-la
 			Parent parent = loader.load();
 			Scene mainScene = new Scene(parent);
 			primaryStage.setScene(mainScene);
@@ -26,8 +26,7 @@ public class Main extends Application {
 		}
 		
 	}
-	
-	
+		
 	
 	public static void main(String[] args) {
 		
@@ -36,3 +35,4 @@ public class Main extends Application {
 		
 	}
 }
+
