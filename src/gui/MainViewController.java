@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import application.Main;
 import gui.util.Alerts;
@@ -34,12 +35,17 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemDepartmentAction() {
-		loadView2("/gui/DepartmentList.fxml");
+		loadView("/gui/DepartmentList.fxml",
+				//Acao de inicializacao do controle da classe de departamentos (funcao lambda)
+			(DepartmentListController controller) -> {
+			controller.setDepartmentService(new DepartmentService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
 	public void onMenuItemAboutrAction() {
-		loadView("/gui/About.fxml");
+		loadView("/gui/About.fxml", x -> {});//A tela About leva uma funcao lambda vazia pois nao precisa inicializar nada
 	}
 	
 	@Override
@@ -50,7 +56,7 @@ public class MainViewController implements Initializable{
 	
 	
 	//Funcao para abrir outras telas
-	private synchronized void loadView(String absoluteName) {
+	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVBox = loader.load();
@@ -62,6 +68,11 @@ public class MainViewController implements Initializable{
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+			
+			//Comandos para ativar a funcao passado no segundo parametro
+			T controller = loader.getController();//O getController() retorna um controlador do tipo //instanciado no segundo parametro
+			initializingAction.accept(controller);						  
 			
 		}catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading View", e.getMessage(), AlertType.ERROR);
