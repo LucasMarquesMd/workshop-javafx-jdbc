@@ -1,8 +1,9 @@
 package model.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
 import model.entities.Department;
 
 
@@ -12,12 +13,17 @@ import model.entities.Department;
  */
 public class DepartmentService {
 	
+	//Cria uma referencia para a interface DepartmentDao
+	//O Daofactory na verdade instancial a classe de conexao SellerDaoJDBC 
+	//Essa classe ja implementa todos os metodosdefinidos pela interface DepartmentDao
+	//E ja realiza a instancia a conexao com banco de dados na classe DB
+	private DepartmentDao dao = DaoFactory.createDepartmentDao();
+	
+	
 	//Retorna ima lista de departamentos
 	public List<Department> findAll(){
-		List<Department> list = new ArrayList<Department>();
-		list.add(new Department(1, "Books"));
-		list.add(new Department(2, "Computers"));
-		list.add(new Department(1, "Electronics"));
-		return list;
+		return dao.findAll();
 	}
+	
+	
 }

@@ -2,10 +2,6 @@ package model.entities;
 
 import java.io.Serializable;
 
-
-/*
- * Classe responsavel por manter os dados do banco de dados
- */
 public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
