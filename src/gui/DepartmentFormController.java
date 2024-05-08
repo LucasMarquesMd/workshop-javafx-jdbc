@@ -60,7 +60,7 @@ public class DepartmentFormController implements Initializable{
 		//Define o maximo de caracteres
 		Constraints.setTextFieldMaxLength(txtName, 30);
 	}
-	
+	//
 	
 	//Responsavel por pegar os dados da entity e popular o formulario DepartmentForm
 	public void updateFormData() {
