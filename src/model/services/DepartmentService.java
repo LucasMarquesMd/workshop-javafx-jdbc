@@ -25,5 +25,14 @@ public class DepartmentService {
 		return dao.findAll();
 	}
 	
+	public void saveOrUpdate(Department obj) {
+		if(obj.getId() == null) {//Nao nao tiver id ainda -> entao e uma insercao
+			dao.insert(obj);
+		}else {//Se ja tiver
+			dao.update(obj);
+		}
+		
+	}
+	
 	
 }

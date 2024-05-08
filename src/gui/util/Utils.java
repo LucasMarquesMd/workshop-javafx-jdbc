@@ -17,4 +17,16 @@ public class Utils {
 		
 		return (Stage) ((Node) event.getSource()).getScene().getWindow();
 	}
+	
+	//Retorna um Integer dado uma string
+	public static Integer tryParseToInt(String str) {
+		try {
+			return Integer.parseInt(str);
+			
+		}catch (NumberFormatException e) {
+			//Retorna nulo caso a conversao falhe
+			return null;
+		}
+		
+	}
 }

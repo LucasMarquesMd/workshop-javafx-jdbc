@@ -45,7 +45,7 @@ public class MainViewController implements Initializable{
 
 	
 	@FXML
-	public void onMenuItoutemAbrAction() {
+	public void onMenuItemAboutAction() {
 		loadView("/gui/About.fxml", x -> {});//A tela About leva uma funcao lambda vazia pois nao precisa inicializar nada
 	}
 	
